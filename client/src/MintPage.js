@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import detectEthereumProvider from '@metamask/detect-provider';
 import Web3 from 'web3';
 import abi from './nftshirts-abi.json';
+import tshirtImage from './tshirt1.png'; // Adjust the path as necessary
 
 const contractAddress = '0x5295c1523aee5F6b12246501aba6424895b9D375';
 
@@ -11,6 +12,7 @@ function MintPage() {
   const [accounts, setAccounts] = useState([]);
   const [design, setDesign] = useState('');
   const [transactionStatus, setTransactionStatus] = useState('');
+  const [isMinted, setIsMinted] = useState(false);
   
   useEffect(() => {
     const init = async () => {
@@ -40,6 +42,7 @@ function MintPage() {
       console.log(`Transaction confirmed. Confirmation number: ${confirmationNumber}. Receipt:`);
       console.log(receipt); 
       setTransactionStatus('Transaction confirmed!');
+      setIsMinted(true);
     })
     .on('error', console.error)
     .catch((err) => {
@@ -53,16 +56,24 @@ function MintPage() {
   };
 
   return (
-    <div>
-      <h2>Mint Your NFT</h2>
-      <select value={design} onChange={handleDesignChange}>
-        {/* Options should be populated based on available designs */}
-        <option value="design1">Design 1</option>
-        <option value="design2">Design 2</option>
-        {/* ... other designs */}
-      </select>
-      <button onClick={handleMint}>Mint NFT</button>
-      <p>{transactionStatus}</p>
+    <div className="mint-container">
+      <h2 className="main-heading">Mint Your NFT</h2>
+      <div className="mint-item-container">
+        <select className="mint-item" value={design} onChange={handleDesignChange}>
+          {/* Options should be populated based on available designs */}
+          <option value="design1">Design 1</option>
+          <option value="design2">Design 2</option>
+          {/* ... other designs */}
+        </select>
+        <button className="mint-button" onClick={handleMint}>Mint NFT</button>
+      </div>
+      {isMinted && (
+        <div className="minted-tshirt-container">
+          <h3>Your Unique NFT-Shirt!</h3>
+          <img src={tshirtImage} alt="Minted T-Shirt" className="minted-tshirt-image" />
+        </div>
+      )}
+      <p className="sub-heading">{transactionStatus}</p>
     </div>
   );
 }
