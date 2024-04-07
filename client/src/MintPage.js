@@ -4,8 +4,7 @@ import detectEthereumProvider from '@metamask/detect-provider';
 import Web3 from 'web3';
 import abi from './nftshirts-abi.json';
 
-const contractAddress = '0x28b12a2bDa3e15bd947229f54Cd9EaF90A7A4F21';
-
+const contractAddress = '0x5295c1523aee5F6b12246501aba6424895b9D375';
 
 function MintPage() {
   const [contract, setContract] = useState(null);
