@@ -1,0 +1,62 @@
+/* HomePage.css */
+.home-container {
+    margin: 0 auto;
+    padding-top: 10px; /* Adjusted to ensure enough space above */
+    max-width: 1200px; /* Max width for the container */
+    text-align: center;
+    overflow: hidden; /* Prevent horizontal scroll */
+  }
+  
+  .carousel-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px auto; /* Vertically space out the carousel */
+    gap: 30px; /* Adds space between carousel items */
+  }
+  
+  .carousel-slide {
+    flex: 0 0 auto; /* Do not grow or shrink */
+  }
+  
+  .carousel-image {
+    transition: transform 0.5s ease, opacity 0.5s ease;
+    opacity: 0.5; /* Slightly see-through for inactive images */
+    max-height: 300px; /* Limit the height of the images */
+  }
+  
+  .carousel-image.active {
+    transform: scale(1.2); /* Scale up the active image */
+    opacity: 1;
+  }
+  
+  /* Style arrows */
+  .carousel-arrow {
+    cursor: pointer;
+    user-select: none;
+    font-size: 2em; /* Size of the arrows */
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+  }
+  
+  .carousel-arrow.left {
+    left: 10px;
+  }
+  
+  .carousel-arrow.right {
+    right: 10px;
+  }
+  
+  /* Add any additional styling for main heading and subheading below */
+  .main-heading {
+    font-size: 3em;
+    margin-bottom: 0.5em; /* Adjust the margin as needed */
+  }
+  
+  .sub-heading {
+    font-size: 1.5em;
+    margin-bottom: 1em; /* Adjust the margin as needed */
+  }
+  

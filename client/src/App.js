@@ -9,6 +9,7 @@ function App() {
   return (
     <Router>
       <NavigationBar />
+      {/* Comment out Routes to test NavigationBar alone */}
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/mint" element={<MintPage />} />
@@ -17,5 +18,6 @@ function App() {
     </Router>
   );
 }
+
 
 export default App;

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './OrderPage.css';
 
 function OrderPage() {
   const [nftId, setNftId] = useState('');

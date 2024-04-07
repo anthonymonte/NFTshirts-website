@@ -1,0 +1,28 @@
+/* OrderPage.css */
+.order-container {
+    margin: 20px;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .order-heading {
+    font-size: 1.5em;
+    margin-bottom: 1em;
+  }
+  
+  .order-form input {
+    margin: 10px 0;
+    padding: 8px;
+    border: 1px solid #ddd; /* Light grey border */
+  }
+  
+  .order-form button {
+    padding: 10px 20px;
+    background-color: #5cb85c; /* Green background for submit button */
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  /* Other OrderPage styles */
+  

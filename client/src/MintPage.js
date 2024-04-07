@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './MintPage.css'; 
 
 function MintPage() {
   const [design, setDesign] = useState('');
