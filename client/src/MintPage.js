@@ -59,12 +59,6 @@ function MintPage() {
     <div className="mint-container">
       <h2 className="main-heading">Mint Your NFT</h2>
       <div className="mint-item-container">
-        <select className="mint-item" value={design} onChange={handleDesignChange}>
-          {/* Options should be populated based on available designs */}
-          <option value="design1">Design 1</option>
-          <option value="design2">Design 2</option>
-          {/* ... other designs */}
-        </select>
         <button className="mint-button" onClick={handleMint}>Mint NFT</button>
       </div>
       {isMinted && (
