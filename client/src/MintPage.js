@@ -1,34 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import './MintPage.css';
-import detectEthereumProvider from '@metamask/detect-provider';
 import Web3 from 'web3';
-import abi from './nftshirts-abi.json';
 import tshirtImage from './tshirt1.png'; 
+import useContract from './contract-hook';
 
-const contractAddress = '0x5295c1523aee5F6b12246501aba6424895b9D375';
 
 function MintPage() {
-  const [contract, setContract] = useState(null);
-  const [accounts, setAccounts] = useState([]);
   const [transactionStatus, setTransactionStatus] = useState('');
   const [isMinting, setIsMinting] = useState(false);
   const [isMinted, setIsMinted] = useState(false);  // Define isMinted here
-
-  useEffect(() => {
-    const init = async () => {
-      const provider = await detectEthereumProvider();
-      if (provider) {
-        const web3 = new Web3(provider);
-        const accounts = await provider.request({ method: 'eth_requestAccounts' });
-        setAccounts(accounts);
-        const contract = new web3.eth.Contract(abi, contractAddress);
-        setContract(contract);
-      } else {
-        console.error('Please install MetaMask.');
-      }
-    };
-    init();
-  }, []);
+  const {contract, accounts} = useContract();
 
   const handleMint = async () => {
     setIsMinting(true);
@@ -56,7 +37,7 @@ function MintPage() {
       <div className="mint-item-container">
         <button className="mint-button" onClick={handleMint} disabled={isMinting}>
           {isMinting ? 'Minting...' : 'Mint NFT'}
-        </button>
+        </button>        
       </div>
       {isMinting && <div className="loader"></div>}
       {transactionStatus && <p className="sub-heading">{transactionStatus}</p>}
