@@ -4,6 +4,7 @@ import HomePage from './HomePage';
 import MintPage from './MintPage';
 import OrderPage from './OrderPage';
 import NavigationBar from './NavigationBar';
+import { NFTViewPage } from './NFTViewPage';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/mint" element={<MintPage />} />
         <Route path="/order" element={<OrderPage />} />
+        <Route path="/:id" element={<NFTViewPage />} />
       </Routes>
     </Router>
   );
