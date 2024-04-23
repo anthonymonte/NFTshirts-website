@@ -100,6 +100,18 @@
   margin-bottom: 10px;
 }
 
+.loader {
+  border: 12px solid #f3f3f3; /* Light grey background */
+  border-top: 12px solid #4CAF50; /* Match the mint button green color */
+  border-radius: 50%;
+  width: 80px; /* Reduced size */
+  height: 80px; /* Keep it a perfect circle */
+  animation: spin 2s linear infinite;
+  margin: 20px auto; /* Center the loader, reduce margin for smaller size */
+}
 
-/* Add any additional styling specific to the Mint NFT page below */
-/* ... */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
