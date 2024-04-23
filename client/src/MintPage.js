@@ -1,19 +1,19 @@
-import './MintPage.css'; 
 import React, { useEffect, useState } from 'react';
+import './MintPage.css';
 import detectEthereumProvider from '@metamask/detect-provider';
 import Web3 from 'web3';
 import abi from './nftshirts-abi.json';
-import tshirtImage from './tshirt1.png'; // Adjust the path as necessary
+import tshirtImage from './tshirt1.png'; 
 
 const contractAddress = '0x5295c1523aee5F6b12246501aba6424895b9D375';
 
 function MintPage() {
   const [contract, setContract] = useState(null);
   const [accounts, setAccounts] = useState([]);
-  const [design, setDesign] = useState('');
   const [transactionStatus, setTransactionStatus] = useState('');
-  const [isMinted, setIsMinted] = useState(false);
-  
+  const [isMinting, setIsMinting] = useState(false);
+  const [isMinted, setIsMinted] = useState(false);  // Define isMinted here
+
   useEffect(() => {
     const init = async () => {
       const provider = await detectEthereumProvider();
@@ -31,43 +31,41 @@ function MintPage() {
   }, []);
 
   const handleMint = async () => {
-    console.log(`Minting design: ${design}`);
-    const price = Web3.utils.toWei('0.001', 'ether'); // Set the price in Wei
+    setIsMinting(true);
+    const price = Web3.utils.toWei('0.001', 'ether'); 
     contract.methods.createCollectible().send({ from: accounts[0], value: price })
-    .on('transactionHash', (hash) => { 
-      console.log(`Transaction hash: ${hash}`);
+    .on('transactionHash', (hash) => {
       setTransactionStatus('Transaction in progress...')
     })
-    .on('confirmation', (confirmationNumber, receipt) => { 
-      console.log(`Transaction confirmed. Confirmation number: ${confirmationNumber}. Receipt:`);
-      console.log(receipt); 
+    .on('confirmation', (confirmationNumber, receipt) => {
+      setIsMinting(false);
+      setIsMinted(true);  // Update isMinted state here
       setTransactionStatus('Transaction confirmed!');
-      setIsMinted(true);
     })
-    .on('error', console.error)
-    .catch((err) => {
-      console.error(err);
+    .on('error', (error) => {
+      setIsMinting(false);
+      setIsMinted(false);  // Update isMinted state here
       setTransactionStatus('An error occurred. Please try again.');
+      console.error(error);
     });
-  };
-
-  const handleDesignChange = (event) => {
-    setDesign(event.target.value);
   };
 
   return (
     <div className="mint-container">
       <h2 className="main-heading">Mint Your NFT</h2>
       <div className="mint-item-container">
-        <button className="mint-button" onClick={handleMint}>Mint NFT</button>
+        <button className="mint-button" onClick={handleMint} disabled={isMinting}>
+          {isMinting ? 'Minting...' : 'Mint NFT'}
+        </button>
       </div>
+      {isMinting && <div className="loader"></div>}
+      {transactionStatus && <p className="sub-heading">{transactionStatus}</p>}
       {isMinted && (
         <div className="minted-tshirt-container">
           <h3>Your Unique NFT-Shirt!</h3>
           <img src={tshirtImage} alt="Minted T-Shirt" className="minted-tshirt-image" />
         </div>
       )}
-      <p className="sub-heading">{transactionStatus}</p>
     </div>
   );
 }

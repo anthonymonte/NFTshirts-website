@@ -27,8 +27,8 @@ function HomePage() {
 
   return (
     <div className="home-container">
-      <h1 className="main-heading">Our Collection</h1>
-      <p className="sub-heading">Select your favorite design</p>
+      <h1 className="main-heading">NFT-Shirt Collection</h1>
+      <p className="sub-heading">Our most recent designs</p>
       <div className="carousel-container">
         <div className="carousel-arrow left" onClick={goToPrevSlide}>&lt;</div>
         {tshirtImages.map((image, index) => (
