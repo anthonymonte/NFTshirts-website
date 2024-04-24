@@ -20,15 +20,19 @@
   }
   
   .carousel-image {
-    transition: transform 0.5s ease, opacity 0.5s ease;
     opacity: 0.5; /* Slightly see-through for inactive images */
-    max-height: 300px; /* Limit the height of the images */
-  }
-  
-  .carousel-image.active {
-    transform: scale(1.2); /* Scale up the active image */
+    transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+/* Specific style for the t-shirt base image */
+.tshirt-base {
+    max-height: 300px; /* Limit the height of the t-shirt images */
+}
+
+.tshirt-base.carousel-image.active {
+    transform: scale(1.2); /* Scale up only the t-shirt */
     opacity: 1;
-  }
+}
   
   /* Style arrows */
   .carousel-arrow {
@@ -59,4 +63,36 @@
     font-size: 1.5em;
     margin-bottom: 1em; /* Adjust the margin as needed */
   }
+
+/* Style for the container that will hold both the t-shirt and the QR code */
+.tshirt-image-container {
+  position: relative;
+  width: auto; /* Adjust based on your image size */
+  height: auto; /* Adjust based on your image size */
+  display: inline-block; /* Align properly without taking full width */
+}
+
+.qr-code {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -75%) scale(1); /* Center the QR code on the t-shirt */
+  width: 100px; /* Fixed width for QR code */
+  height: 100px; /* Fixed height for QR code */
+  transition: transform 0.5s ease, opacity 0.5s ease; /* Smooth transition for visibility and scaling */
+}
+
+.qr-code.carousel-image.active {
+  transform: translate(-50%, -75%) scale(1.1); /* Scale up the QR code a bit when active */
+  opacity: 1;
+}
+
+/* Style for the t-shirt image to ensure it fills the container */
+.tshirt-base {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+  
   

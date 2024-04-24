@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./HomePage.css";
-import tshirtImage1 from "./tshirt1.png";
+import tshirtTemplate from "./tshirt1.png";
 import tshirtImage2 from "./tshirt2.png";
 import tshirtImage3 from "./tshirt3.png";
 import useContract from "./contract-hook";
@@ -10,7 +10,7 @@ function HomePage() {
   const [activeIndex, setActiveIndex] = useState(0);
   const { contract } = useContract();
   const [tshirtImages, setTshirtImages] = useState([
-    tshirtImage1,
+    tshirtTemplate,
     tshirtImage2,
     tshirtImage3,
   ]);
@@ -37,18 +37,14 @@ function HomePage() {
   const goToNextSlide = () => {
     setActiveIndex((current) => (current + 1) % tshirtImages.length);
   };
-
   const getCounter = async () => {
     const count = await contract.methods.tokenCounter().call();
+    const maxImagesToShow = 3; // Adjust if you want more images
     setTshirtImages(
-      new Array(3)
-        .fill(0)
-        .map((_, i) => count - 1n - BigInt(i))
-        .filter((i) => i >= 0)
-        .map(
-          (i) =>
-            `https://alteredbeasts.s3.us-east-2.amazonaws.com/img_${i}.png`
-        )
+      new Array(maxImagesToShow).fill().map((_, i) => {
+        const index = count - BigInt(i + 1);
+        return index >= 0 ? `https://alteredbeasts.s3.us-east-2.amazonaws.com/img_${index}.png` : null;
+      }).filter(url => url)
     );
   };
 
@@ -57,20 +53,16 @@ function HomePage() {
       <h1 className="main-heading">NFT-Shirt Collection</h1>
       <p className="sub-heading">Our most recent designs</p>
       <div className="carousel-container">
-        <div className="carousel-arrow left" onClick={goToPrevSlide}>
+        <div className="carousel-arrow left" onClick={() => goToPrevSlide()}>
           &lt;
         </div>
         {tshirtImages.map((image, index) => (
-          <img
-            key={index}
-            src={image}
-            alt={`T-Shirt ${index}`}
-            className={`carousel-image ${
-              index === activeIndex ? "active" : ""
-            }`}
-          />
+          <div key={index} className="tshirt-image-container">
+            <img src={tshirtTemplate} alt="T-Shirt Template" className={`tshirt-base carousel-image ${index === activeIndex ? "active" : ""}`}/>
+            <img src={image} alt={`QR Code ${index}`} className={`qr-code carousel-image ${index === activeIndex ? "active" : ""}`}/>
+          </div>
         ))}
-        <div className="carousel-arrow right" onClick={goToNextSlide}>
+        <div className="carousel-arrow right" onClick={() => goToNextSlide()}>
           &gt;
         </div>
       </div>
