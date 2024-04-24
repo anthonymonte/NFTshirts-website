@@ -1,11 +1,28 @@
-import React from "react";
-import { useParams } from 'react-router-dom';
-import NFTGrid from "./NFTGrid";
+import React, { useEffect, useState } from "react";
+import { useParams, useNavigate } from 'react-router-dom';
+import useContract from "./contract-hook";
 
 export function NFTViewPage() {
   const { id } = useParams();
-  // return <NFTView ownerAddress='abcd' nftId={id} />
-  return <NFTGrid />
+  const { contract } = useContract();
+  const [owner, setOwner] = useState();
+
+  useEffect(() => {
+    if (contract) {
+      ownerOf(id);
+    }
+  }, [contract, id])
+
+  const ownerOf = async (id) => {
+    try {
+      const owner = await contract.methods.ownerOf(id).call()
+      setOwner(owner);
+    } catch {
+      setOwner('Nonexistant token')
+    }
+  };
+
+  return <NFTView ownerAddress={owner} nftId={id} />
 }
 
 
@@ -17,7 +34,7 @@ export function NFTView(props) {
       flexDirection: 'column',
       alignItems: 'center',
       justifyContent: 'center',
-      height: '100vh',
+      height: 'calc(100vh - 62px)',
       backgroundColor: '#f0f0f0',
       padding: '20px',
       boxSizing: 'border-box'
@@ -39,7 +56,7 @@ export function NFTView(props) {
       marginBottom: '5px'
     },
     address: {
-      fontSize: '16px',
+      fontSize: '10px',
       fontWeight: 'normal',
       color: '#555'
     }
@@ -47,10 +64,10 @@ export function NFTView(props) {
 
   return (
     <div style={styles.container}>
-      <img src={`https://alteredbeasts.s3.us-east-2.amazonaws.com/img_${props.nftId}.png`} alt="NFT" style={styles.image} />
+      <img src={`https://alteredbeasts.s3.us-east-2.amazonaws.com/nft_${props.nftId}.png`} alt="NFT" style={styles.image} />
       <div style={styles.infoContainer}>
         <div style={styles.id}>NFT ID: {props.nftId}</div>
-        <div style={styles.address}>Owner: {props.ownerAddress}</div>
+        <div style={styles.address}>Owner: {props.ownerAddress || 'Loading...'}</div>
       </div>
     </div>
   );

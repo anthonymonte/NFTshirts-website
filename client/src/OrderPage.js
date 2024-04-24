@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './OrderPage.css'; // Ensure the CSS is correctly linked
+import NFTGrid from './NFTGrid';
 
 function OrderPage() {
   const [nftId, setNftId] = useState('');
@@ -45,6 +46,7 @@ function OrderPage() {
         />
         <button onClick={handleSubmitOrder}>Submit Order</button>
       </form>
+      <NFTGrid />
     </div>
   );
 }

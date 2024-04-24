@@ -67,6 +67,7 @@
 /* Style for the container that will hold both the t-shirt and the QR code */
 .tshirt-image-container {
   position: relative;
+  cursor: pointer;
   width: auto; /* Adjust based on your image size */
   height: auto; /* Adjust based on your image size */
   display: inline-block; /* Align properly without taking full width */

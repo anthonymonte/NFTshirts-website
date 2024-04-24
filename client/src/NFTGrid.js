@@ -1,12 +1,24 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import useContract from './contract-hook';
 
 function NFTGrid() {
-  const nfts = [
-    { imageUrl: 'https://alteredbeasts.s3.us-east-2.amazonaws.com/img_37.png', id: '1', owner: '0x123...def' },
-    { imageUrl: 'https://alteredbeasts.s3.us-east-2.amazonaws.com/img_37.png', id: '2', owner: '0x456...ghi' },
-    { imageUrl: 'https://alteredbeasts.s3.us-east-2.amazonaws.com/img_37.png', id: '3', owner: '0x789...jkl' },
-    // Add more NFTs as needed
-  ];
+  const {contract, accounts} = useContract();
+  const [nftData, setNftData] = useState([]);
+
+  useEffect(() => {
+    if (contract)
+      getMyNFTs();
+  }, [contract, accounts])
+
+  async function getMyNFTs() {
+    const response = await contract.methods.getMyNFTs().call({ from: accounts[0] });
+    const items = response[0].map((tokenId, index) => ({
+      tokenId,
+      imageUrl: `https://alteredbeasts.s3.us-east-2.amazonaws.com/nft_${tokenId}.png`,
+      owner: accounts[0]
+    }));
+    setNftData(items);
+  }
 
   const styles = {
     grid: {
@@ -36,7 +48,7 @@ function NFTGrid() {
     },
     info: {
       marginTop: '10px',
-      fontSize: '16px'
+      fontSize: '10px'
     },
     buttonContainer: {
       width: '100%',
@@ -58,11 +70,11 @@ function NFTGrid() {
 
   return (
     <div style={styles.grid}>
-      {nfts.map((nft) => (
+      {nftData.map((nft) => (
         <div key={nft.id} style={styles.card}>
-          <img src={nft.imageUrl} alt={`NFT ${nft.id}`} style={styles.image} />
+          <img src={nft.imageUrl} alt={`NFT ${nft.tokenId}`} style={styles.image} />
           <div style={styles.info}>
-            <div>ID: {nft.id}</div>
+            <div>{`ID: ${nft.tokenId}`}</div>
             <div>Owner: {nft.owner}</div>
           </div>
           <div style={styles.buttonContainer}>

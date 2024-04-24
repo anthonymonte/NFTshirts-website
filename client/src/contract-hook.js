@@ -17,7 +17,14 @@ const amoyDetails = {
   blockExplorerUrls: ['https://www.oklink.com/amoy']
 };
 
-const contractAddress = '0x4436Dbb8152614D2FCEe6b68c0aA385e4Cd5e015';
+const sepoliaDetails = {
+  chainId: '0xaa36a7', // Hexadecimal chain ID for Polygon Mainnet
+  chainName: 'Sepolia test network',
+  rpcUrls: ['https://sepolia.infura.io/v3/'],
+  blockExplorerUrls: ['https://sepolia.etherscan.io']
+}
+
+const contractAddress = '0x665f04bBEbC70B688e2963F2D935acD4e7481CEF';
 
 const useContract = () => {
   const [contract, setContract] = useState(null);
@@ -33,14 +40,14 @@ const useContract = () => {
         // Switch to Polygon network
         await window.ethereum.request({
           method: 'wallet_switchEthereumChain',
-          params: [{ chainId: amoyDetails.chainId }],
+          params: [{ chainId: sepoliaDetails.chainId }],
         }).catch(async (switchError) => {
           // This error code indicates that the chain has not been added to MetaMask
           if (switchError.code === 4902) {
             try {
               await window.ethereum.request({
                 method: 'wallet_addEthereumChain',
-                params: [amoyDetails]
+                params: [sepoliaDetails]
               });
             } catch (addError) {
               console.error('Failed to add the Polygon network:', addError);

@@ -1,8 +1,8 @@
 /* NavigationBar.css */
 nav {
     background-color: transparent;
-    padding: 10px 20px;
     width: 100%;
+    height: 62px;
     box-sizing: border-box; /* Ensures padding is included in the width */
 }
 

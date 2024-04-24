@@ -4,10 +4,13 @@ import tshirtTemplate from "./tshirt1.png";
 import tshirtImage2 from "./tshirt2.png";
 import tshirtImage3 from "./tshirt3.png";
 import useContract from "./contract-hook";
+import { useNavigate } from 'react-router-dom';
 /* global BigInt */
 
 function HomePage() {
+  const navigate = useNavigate();
   const [activeIndex, setActiveIndex] = useState(0);
+  const [tokenIndices, setTokenIndices] = useState([]);
   const { contract } = useContract();
   const [tshirtImages, setTshirtImages] = useState([
     tshirtTemplate,
@@ -40,10 +43,11 @@ function HomePage() {
   const getCounter = async () => {
     const count = await contract.methods.tokenCounter().call();
     const maxImagesToShow = 3; // Adjust if you want more images
+    const indices = new Array(maxImagesToShow).fill().map((_, i) => count - BigInt(i + 1));
+    setTokenIndices(indices);
     setTshirtImages(
-      new Array(maxImagesToShow).fill().map((_, i) => {
-        const index = count - BigInt(i + 1);
-        return index >= 0 ? `https://alteredbeasts.s3.us-east-2.amazonaws.com/img_${index}.png` : null;
+      indices.map((i) => {
+        return i >= 0 ? `https://alteredbeasts.s3.us-east-2.amazonaws.com/nft_${i}.png` : null;
       }).filter(url => url)
     );
   };
@@ -57,7 +61,7 @@ function HomePage() {
           &lt;
         </div>
         {tshirtImages.map((image, index) => (
-          <div key={index} className="tshirt-image-container">
+          <div key={index} className="tshirt-image-container" onClick={() => navigate(`/${tokenIndices[index]}`)}>
             <img src={tshirtTemplate} alt="T-Shirt Template" className={`tshirt-base carousel-image ${index === activeIndex ? "active" : ""}`}/>
             <img src={image} alt={`QR Code ${index}`} className={`qr-code carousel-image ${index === activeIndex ? "active" : ""}`}/>
           </div>
