@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './OrderPage.css'; // Ensure the CSS is correctly linked
-import NFTGrid from './NFTGrid';
+import NFTGrid from '../components/NFTGrid';
 
 function OrderPage() {
   const [nftId, setNftId] = useState('');

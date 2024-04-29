@@ -1,10 +1,10 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import HomePage from './HomePage';
-import MintPage from './MintPage';
-import OrderPage from './OrderPage';
-import NavigationBar from './NavigationBar';
-import { NFTViewPage } from './NFTViewPage';
+import HomePage from './pages/HomePage';
+import MintPage from './pages/MintPage';
+import OrderPage from './pages/OrderPage';
+import NavigationBar from './components/NavigationBar';
+import { NFTViewPage } from './pages/NFTViewPage';
 
 function App() {
   return (

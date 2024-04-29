@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import Web3 from 'web3';
-import abi from './nftshirts-abi.json';
+import abi from '../nftshirts-abi.json';
 
 // Polygon Mainnet details
 const polygonDetails = {

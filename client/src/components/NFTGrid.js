@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import useContract from './contract-hook';
+import useContract from '../logic/contract-hook';
 
 function NFTGrid() {
   const {contract, accounts} = useContract();

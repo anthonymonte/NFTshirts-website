@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import './MintPage.css';
 import Web3 from 'web3';
-import tshirtImage from './tshirt1.png'; 
-import useContract from './contract-hook';
+import tshirtImage from '../tshirt1.png'; 
+import useContract from '../logic/contract-hook';
 
 
 function MintPage() {

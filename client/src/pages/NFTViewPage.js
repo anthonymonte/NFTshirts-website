@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from 'react-router-dom';
-import useContract from "./contract-hook";
+import useContract from "../logic/contract-hook";
 
 export function NFTViewPage() {
   const { id } = useParams();

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "./HomePage.css";
-import tshirtTemplate from "./tshirt1.png";
-import tshirtImage2 from "./tshirt2.png";
-import tshirtImage3 from "./tshirt3.png";
-import useContract from "./contract-hook";
+import tshirtTemplate from "../tshirt1.png";
+import tshirtImage2 from "../tshirt2.png";
+import tshirtImage3 from "../tshirt3.png";
+import useContract from "../logic/contract-hook";
 import { useNavigate } from 'react-router-dom';
 /* global BigInt */
 
