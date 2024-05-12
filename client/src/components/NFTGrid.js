@@ -58,13 +58,14 @@ function NFTGrid() {
     },
     button: {
       padding: '10px 20px',
+      fontSize: '.8rem',
       border: 'none',
       borderRadius: '5px',
       color: 'white',
       fontWeight: 'bold',
       cursor: 'pointer',
       width: '7rem',
-      background: 'linear-gradient(to right, #1ddb20 0%, #1ddb89 100%)' // Gradient color
+      background: 'linear-gradient(to right, #1ddb20 0%, #1ddb89 100%)'
     }
   };
 

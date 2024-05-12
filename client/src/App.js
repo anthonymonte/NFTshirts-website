@@ -5,6 +5,10 @@ import MintPage from './pages/MintPage';
 import OrderPage from './pages/OrderPage';
 import NavigationBar from './components/NavigationBar';
 import { NFTViewPage } from './pages/NFTViewPage';
+import UncontrolledExample from './pages/test';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+
 
 function App() {
   return (
@@ -16,6 +20,7 @@ function App() {
         <Route path="/mint" element={<MintPage />} />
         <Route path="/order" element={<OrderPage />} />
         <Route path="/:id" element={<NFTViewPage />} />
+        <Route path="/test" element={<UncontrolledExample />} />
       </Routes>
     </Router>
   );

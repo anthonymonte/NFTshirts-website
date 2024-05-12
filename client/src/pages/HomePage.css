@@ -4,7 +4,7 @@
     padding-top: 10px; /* Adjusted to ensure enough space above */
     max-width: 1200px; /* Max width for the container */
     text-align: center;
-    overflow: hidden; /* Prevent horizontal scroll */
+    overflow: visible; /* Prevent horizontal scroll */
   }
   
   .carousel-container {
@@ -16,7 +16,16 @@
   }
   
   .carousel-slide {
-    flex: 0 0 auto; /* Do not grow or shrink */
+    /* flex: 0 0 auto; */
+    max-width: 100%;
+    opacity: 80%;
+    transition-property: all;
+    transition-duration: 400ms;
+  }
+
+  .focused {
+    transform: scale(1.15);
+    opacity: 100%;
   }
   
   .carousel-image {
@@ -96,4 +105,6 @@
 }
 
   
-  
+.shirt-canvas {
+  max-width: 80%;
+}

@@ -29,6 +29,7 @@ const contractAddress = '0x665f04bBEbC70B688e2963F2D935acD4e7481CEF';
 const useContract = () => {
   const [contract, setContract] = useState(null);
   const [accounts, setAccounts] = useState([]);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const loadContract = async () => {
@@ -60,7 +61,7 @@ const useContract = () => {
         const loadedContract = new web3.eth.Contract(abi, contractAddress);
         setContract(loadedContract);
       } catch (err) {
-        console.error('Failed to load contract:', err);
+        setError(err);
       }
     };
 

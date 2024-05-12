@@ -69,6 +69,7 @@ export function NFTView(props) {
         <div style={styles.id}>NFT ID: {props.nftId}</div>
         <div style={styles.address}>Owner: {props.ownerAddress || 'Loading...'}</div>
       </div>
+      {`https://alteredbeasts.s3.us-east-2.amazonaws.com/nft_${props.nftId}.png`}
     </div>
   );
 }
