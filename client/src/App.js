@@ -10,7 +10,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 
-function App() {
+function App(props) {
   return (
     <Router>
       <NavigationBar />
@@ -25,6 +25,5 @@ function App() {
     </Router>
   );
 }
-
 
 export default App;

@@ -108,3 +108,18 @@
 .shirt-canvas {
   max-width: 80%;
 }
+
+.signed-in {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}
+
+.signed-in > img {
+  width: 30px;
+  height: 30px;
+  padding-right: 10px;
+}

@@ -5,6 +5,9 @@ import useContract from "../logic/contract-hook";
 import { Link, useNavigate } from 'react-router-dom';
 import TShirt from "../components/tshirt";
 import { useWidth } from "../logic/utilityhooks";
+import tshirtTemplate from "../tshirt1.png";
+import { useNavigate } from 'react-router-dom';
+import useAccounts from "../logic/accounts-hook";
 /* global BigInt */
 
 function HomePage() {
@@ -14,11 +17,14 @@ function HomePage() {
   const { contract, error } = useContract();
   const [tshirtImages, setTshirtImages] = useState(['', '', '']);
   const width = useWidth();
+  // const [accounts, setAccounts] = useState();
+  const { connected, accounts } = useAccounts();
 
   useEffect(() => {
     const interval = setInterval(() => {
       setActiveIndex((current) => (current + 1) % tshirtImages.length);
     }, 5000); // Change slides every 5 seconds
+
     return () => clearInterval(interval);
   }, []);
 
@@ -94,6 +100,12 @@ function HomePage() {
         ))}
       </Carousel>
     }
+      {connected && accounts?.length > 0 &&
+        <div className="signed-in">
+          <img src='https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/MetaMask_Fox.svg/2048px-MetaMask_Fox.svg.png' alt="metamask"></img>
+          <p>Signed in with MetaMask: {accounts[0]?.substring(0, 4)}...{accounts[0]?.substring(accounts[0].length - 4)}</p>
+        </div>
+      }
     </div>
   );
 }
