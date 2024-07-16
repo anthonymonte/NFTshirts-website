@@ -4,11 +4,24 @@ import './index.css';
 import './global.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { MetaMaskProvider } from '@metamask/sdk-react';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+      <MetaMaskProvider
+        debug={false}
+        sdkOptions={{
+          dappMetadata: {
+            name: "Example React Dapp",
+            url: window.location.href,
+          },
+          infuraAPIKey: 'b70e500cfdf048c286c3de1cb3d8b0cf',
+          // Other options
+      }}
+    >
+      <App />
+    </MetaMaskProvider>
   </React.StrictMode>
 );
 
