@@ -5,8 +5,7 @@ function TShirt(props) {
   const canvas = useRef(null);
 
   useEffect(() => {
-    if (canvas.current) {
-      console.log(props.url)
+    if (canvas.current && props.url !== '') {
       draw(canvas.current.getContext("2d"), props.url);
     }
   }, [canvas, props.url]);

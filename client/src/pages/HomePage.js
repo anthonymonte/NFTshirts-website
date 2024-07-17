@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from "react";
 import "./HomePage.css";
 import Carousel from 'react-bootstrap/Carousel';
-import useContract from "../logic/contract-hook";
 import { Link, useNavigate } from 'react-router-dom';
 import TShirt from "../components/tshirt";
 import { useWidth } from "../logic/utilityhooks";
 import tshirtTemplate from "../tshirt1.png";
-import { useNavigate } from 'react-router-dom';
 import useAccounts from "../logic/accounts-hook";
 /* global BigInt */
 
@@ -14,8 +12,7 @@ function HomePage() {
   const navigate = useNavigate();
   const [activeIndex, setActiveIndex] = useState(0);
   const [tokenIndices, setTokenIndices] = useState([]);
-  const { contract, error } = useContract();
-  const [tshirtImages, setTshirtImages] = useState(['', '', '']);
+  const [tshirtImages, setTshirtImages] = useState(['https://alteredbeasts.s3.us-east-2.amazonaws.com/nft_40.png', 'https://alteredbeasts.s3.us-east-2.amazonaws.com/nft_41.png', 'https://alteredbeasts.s3.us-east-2.amazonaws.com/nft_40.png']);
   const width = useWidth();
   // const [accounts, setAccounts] = useState();
   const { connected, accounts } = useAccounts();
@@ -28,15 +25,13 @@ function HomePage() {
     return () => clearInterval(interval);
   }, []);
 
-  useEffect(() => {
-    if (error !== null) getCounterFromApi();
-  }, [error]);
 
-  useEffect(() => {
-    if (contract) {
-      getCounterFromContract();
-    }
-  }, [contract])
+
+  // useEffect(() => {
+  //   if (contract) {
+  //     getCounterFromContract();
+  //   }
+  // }, [contract])
 
   const goToPrevSlide = () => {
     setActiveIndex((current) =>
@@ -48,13 +43,15 @@ function HomePage() {
     setActiveIndex((current) => (current + 1) % tshirtImages.length);
   };
   const getCounterFromContract = async () => {
-    const count = await contract.methods.tokenCounter().call();
-    makeIndicies(count);
+    // const count = await contract.methods.tokenCounter().call();
+    // makeIndicies(count);
   };
   const getCounterFromApi = async () => {
     // fetch('')
     makeIndicies(8n);
   }
+
+  useEffect(() => console.log(tshirtImages), [tshirtImages]);
 
   const makeIndicies = (count) => {
     const maxImagesToShow = 3; // Adjust if you want more images
@@ -94,7 +91,7 @@ function HomePage() {
         {tshirtImages.map((image, index) => (
           <Carousel.Item>
             <Link to={`/${tokenIndices[index]}`}>
-              <TShirt url={image} className={`shirt-canvas`} />
+              <TShirt url={image} className={`shirt-canvas rotate-3d`} />
             </Link>
           </Carousel.Item>
         ))}
