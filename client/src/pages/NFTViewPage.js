@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from 'react-router-dom';
-import useContract from "../logic/accounts-hook";
+import useContract from "../logic/contract-hook";
 
 export function NFTViewPage() {
   const { id } = useParams();
@@ -35,7 +35,6 @@ export function NFTView(props) {
       alignItems: 'center',
       justifyContent: 'center',
       height: 'calc(100vh - 62px)',
-      backgroundColor: '#f0f0f0',
       padding: '20px',
       boxSizing: 'border-box'
     },
@@ -48,7 +47,7 @@ export function NFTView(props) {
     infoContainer: {
       marginTop: '20px',
       textAlign: 'center',
-      color: '#333'
+      color: '#bbb'
     },
     id: {
       fontSize: '18px',
@@ -56,9 +55,9 @@ export function NFTView(props) {
       marginBottom: '5px'
     },
     address: {
-      fontSize: '10px',
+      fontSize: '14px',
       fontWeight: 'normal',
-      color: '#555'
+      color: '#ccc'
     }
   };
 
@@ -67,9 +66,20 @@ export function NFTView(props) {
       <img src={`https://alteredbeasts.s3.us-east-2.amazonaws.com/nft_${props.nftId}.png`} alt="NFT" style={styles.image} />
       <div style={styles.infoContainer}>
         <div style={styles.id}>NFT ID: {props.nftId}</div>
-        <div style={styles.address}>Owner: {props.ownerAddress || 'Loading...'}</div>
+        <p style={styles.address}> 
+          Owner: {' '}
+          <a 
+            href={`https://etherscan.io/address/${props.ownerAddress}`} 
+            target="_blank"
+            rel="noreferrer"
+          >{props.ownerAddress ? formatAddress(props.ownerAddress) : 'Loading...'}</a>
+        </p>
       </div>
-      {`https://alteredbeasts.s3.us-east-2.amazonaws.com/nft_${props.nftId}.png`}
     </div>
   );
+}
+
+
+function formatAddress(addr) {
+  return `${addr.substring(0, 5)}...${addr.substring(addr.length - 5)}`
 }

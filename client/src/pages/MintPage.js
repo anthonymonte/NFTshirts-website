@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './MintPage.css';
 import Web3 from 'web3';
 import tshirtImage from '../tshirt1.png'; 
-import useContract from '../logic/accounts-hook';
+import useContract from '../logic/contract-hook';
 
 
 function MintPage() {
@@ -10,11 +10,12 @@ function MintPage() {
   const [isMinting, setIsMinting] = useState(false);
   const [isMinted, setIsMinted] = useState(false);  // Define isMinted here
   const [imageUrl, setImageUrl] = useState();
-  const {contract, accounts} = useContract();
+  const {connected, connect, contract, accounts} = useContract();
 
   const handleMint = async () => {
+    if (!connected) return;
     setIsMinting(true);
-    const price = Web3.utils.toWei('0.001', 'ether'); 
+    const price = Web3.utils.toWei('0.001', 'ether');
     contract.methods.createCollectible().send({ from: accounts[0], value: price })
     .on('transactionHash', (hash) => {
       setTransactionStatus('Transaction in progress...')
@@ -44,9 +45,10 @@ function MintPage() {
     <div className="mint-container">
       <h2 className="main-heading">Mint Your NFT</h2>
       <div className="mint-item-container">
-        <button className="mint-button" onClick={handleMint} disabled={isMinting}>
+        <button className={`mint-button ${connected? '' : 'disabled'}`} onClick={handleMint} disabled={isMinting}>
           {isMinting ? 'Minting...' : 'Mint NFT'}
-        </button>        
+        </button>
+        {!connected && <p onClick={connect}>Connect with Metamask</p>}  
       </div>
       {isMinting && <div className="loader"></div>}
       {transactionStatus && <p className="sub-heading">{transactionStatus}</p>}

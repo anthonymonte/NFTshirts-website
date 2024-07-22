@@ -3,7 +3,7 @@ body, html {
     margin: 0;
     padding: 0;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; /* Helvetica is closer to your design */
-    background-color: #f4f4f4; /* Light grey background */
+    background-color: #000000; /* Light grey background */
     color: #333; /* Dark grey text for better contrast */
   }
   
@@ -12,7 +12,7 @@ body, html {
     padding: 0;
     display: flex;
     justify-content: center;
-    background-color: #f8f8f8; /* Example background color */
+    background-color: #000000; /* Example background color */
   }
   
   nav ul li {
@@ -21,7 +21,7 @@ body, html {
   
   nav ul li a {
     text-decoration: none;
-    color: #333; /* Dark text for better contrast */
+    color: #bbb; /* Dark text for better contrast */
     font-weight: bold;
   }
   

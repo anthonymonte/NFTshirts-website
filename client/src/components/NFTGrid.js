@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import useContract from '../logic/accounts-hook';
+import useContract from '../logic/contract-hook';
 
 function NFTGrid() {
   const {contract, accounts} = useContract();
@@ -11,6 +11,7 @@ function NFTGrid() {
   }, [contract, accounts])
 
   async function getMyNFTs() {
+    if (!accounts || accounts?.length <= 0) return;
     const response = await contract.methods.getMyNFTs().call({ from: accounts[0] });
     const items = response[0].map((tokenId, index) => ({
       tokenId,
@@ -27,13 +28,13 @@ function NFTGrid() {
       justifyContent: 'center',
       gap: '20px',
       padding: '20px',
-      backgroundColor: '#f9f9f9'
+      backgroundColor: '#000000'
     },
     card: {
       width: '300px',
       borderRadius: '8px',
       boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
-      backgroundColor: '#fff',
+      backgroundColor: '#323',
       padding: '10px',
       boxSizing: 'border-box',
       display: 'flex',
@@ -48,7 +49,8 @@ function NFTGrid() {
     },
     info: {
       marginTop: '10px',
-      fontSize: '10px'
+      fontSize: '10px',
+      color: 'white',
     },
     buttonContainer: {
       width: '100%',

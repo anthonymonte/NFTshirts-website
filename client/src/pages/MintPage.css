@@ -9,10 +9,17 @@
 
 .mint-item-container {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   margin: 20px auto;
   gap: 30px;
+}
+
+.mint-item-container > p {
+  color: blue;
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 .mint-item {
@@ -45,7 +52,7 @@
 
 /* Button styling for a more professional look */
 .mint-button {
-  background-color: #4CAF50; /* A pleasant green, change as needed */
+  background-image: linear-gradient(to right, #1ddb20 0%, #1ddb89 100%); 
   color: white;
   padding: 12px 24px;
   border: none;
@@ -59,7 +66,13 @@
 
 /* Button hover state */
 .mint-button:hover {
-  background-color: #45a049;
+  /* background-color: #45a049; */
+}
+
+.disabled {
+  background-image: none;
+  background-color: gray;
+  cursor: not-allowed !important;
 }
 
 /* Button active/focus state */
