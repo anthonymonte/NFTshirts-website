@@ -12,7 +12,13 @@ function NFTGrid() {
 
   async function getMyNFTs() {
     if (!accounts || accounts?.length <= 0) return;
-    const response = await contract.methods.getMyNFTs().call({ from: accounts[0] });
+    let response;
+    try {
+      response = await contract.methods.getMyNFTs().call({ from: accounts[0] });
+    } catch (e) {
+      console.error(e);
+    }
+    
     const items = response[0].map((tokenId, index) => ({
       tokenId,
       imageUrl: `https://alteredbeasts.s3.us-east-2.amazonaws.com/nft_${tokenId}.png`,

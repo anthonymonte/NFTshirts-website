@@ -81,5 +81,5 @@ export function NFTView(props) {
 
 
 function formatAddress(addr) {
-  return `${addr.substring(0, 5)}...${addr.substring(addr.length - 5)}`
+  return `asdf${addr.substring(0, 7)}...${addr.substring(addr.length - 6)}`
 }
